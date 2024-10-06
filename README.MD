@@ -21,63 +21,7 @@ Default region name [YOUR_DEFAULT_REGION]: <REGION>
 Default output format [NONE]: json
 ```
 
-The following configuration template was used to monitor EC2 instance metrics in the `us-east-1` region (```example.yml``` file in the project):
-
-```yaml
-region: us-east-1
-metrics:
-  - aws_namespace: AWS/EC2
-    aws_metric_name: CPUUtilization
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: NetworkIn
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: NetworkOut
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: NetworkPacketsIn
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: NetworkPacketsOut
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: DiskWriteBytes
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: DiskReadBytes
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: CPUCreditBalance
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: CPUCreditUsage
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Average]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: StatusCheckFailed
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Sum]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: StatusCheckFailed_Instance
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Sum]
-  - aws_namespace: AWS/EC2
-    aws_metric_name: StatusCheckFailed_System
-    aws_dimensions: [InstanceId]
-    aws_statistics: [Sum]
-aws_tag_select:
-  resource_type_selection: ec2:instance
-  resource_id_dimension: InstanceId
-```
+The configuration template was used to monitor EC2 instance metrics in the `us-east-1` region (```example.yml``` file in the project):
 
 ## Running the CloudWatch Exporter
 1. Clone the repository:
