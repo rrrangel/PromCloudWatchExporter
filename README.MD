@@ -23,27 +23,35 @@ Default output format [NONE]: json
 
 The configuration template was used to monitor EC2 instance metrics in the `us-east-1` region (```example.yml``` file in the project):
 
-## Running the CloudWatch Exporter
-1. Clone the repository:
+## Running the CloudWatch Exporter in AWS EC2 instance (Process that I followed)
+1. Update the instance and install openJDK:
     ```
-    git clone https://github.com/prometheus/cloudwatch_exporter.git
-    cd cloudwatch_exporter
+    sudo apt update
+    sudo apt install -y openjdk-11-jdk
+    java -version
     ```
-    **__Note__**: this project downloaded a JAR file noted in the main project (below)
-2. Build the Docker image:
+2. Configure AWS CLI:
     ```
-    docker build -t cloudwatch_exporter .
-    ```
-
-3. Run the Docker container:
-    ```
-    docker run -d -p 9106:9106 -v $(pwd)/config.yml:/config/config.yml cloudwatch_exporter
+    sudo apt  install awscli
+    aws configure
     ```
 
-4. Verify the exporter is running: Open your browser and navigate to http://localhost:9106/metrics. You should see the metrics being exported.
+3. Download JAR and example.yml; update example.yml **__Note__**: this project downloaded a JAR file noted in the main project (below):
+    ```
+    wget https://repo1.maven.org/maven2/io/prometheus/cloudwatch/cloudwatch_exporter/0.16.0/cloudwatch_exporter-0.16.0-jar-with-dependencies.jar
+    wget https://raw.githubusercontent.com/prometheus/cloudwatch_exporter/cbe73e796998012504485bc3f01298b6403d4615/example.yml
+    vi example.yml
+    ```
+
+4. Run the jar file pointing to the example.yml and use the default port (9601):
+    ```
+    java -jar cloudwatch_exporter-0.6.0-jar-with-dependencies.jar 9601 example.yml
+    ```
+
+5. Verify the exporter is running: Open your browser and navigate to http://localhost:9106/metrics. You should see the metrics being exported.
 
 ## Configuring Prometheus
-Add the following job to your Prometheus configuration:
+I did not use Prometheus but if you want to use prometheus, you can add the following job to your Prometheus configuration (change localhost to the host running CloudWatch Exporter):
 
 ```
 scrape_configs:
