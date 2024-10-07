@@ -8,6 +8,7 @@ This project sets up a Prometheus CloudWatch Exporter to monitor various AWS EC2
 - AWS CLI configured with appropriate permissions <br/>
    **_NOTE:_** Admin used for proof of concept
 - Prometheus (used to pull the metrics and present to dashboarding tool)
+- Cloudwatch Exporter requires at least Java 11.
 
 ## Configuration
 
@@ -24,7 +25,7 @@ Default output format [NONE]: json
 The configuration template was used to monitor EC2 instance metrics in the `us-east-1` region (```example.yml``` file in the project):
 
 ## Running the CloudWatch Exporter in AWS EC2 instance (Process that I followed)
-1. Update the instance and install openJDK:
+1. Update the instance and install openJDK (java):
     ```
     sudo apt update
     sudo apt install -y openjdk-11-jdk
